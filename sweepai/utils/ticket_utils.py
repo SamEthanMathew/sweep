@@ -13,6 +13,7 @@ from sweepai.utils.streamable_functions import streamable
 
 from sweepai.utils.timer import Timer
 from sweepai.agents.analyze_snippets import AnalyzeSnippetAgent
+from sweepai.core.symbol_resolver import resolve_symbols_from_query, _extract_symbol_names_from_query, get_definition_cards_for_file
 from sweepai.config.client import SweepConfig, get_blocked_dirs
 from sweepai.config.server import COHERE_API_KEY, VOYAGE_API_KEY
 from sweepai.core.context_pruning import RepoContextManager, add_relevant_files_to_top_snippets, build_import_trees, parse_query_for_files
@@ -192,6 +193,29 @@ def multi_get_top_k_snippets(
             content_to_lexical_score_list[i][snippet.denotation] = apply_adjustment_score(
                 snippet_path=snippet.denotation, old_score=content_to_lexical_score_list[i][snippet.denotation]
             )
+    try:
+        query_symbols = set()
+        for q in queries:
+            query_symbols.update(_extract_symbol_names_from_query(q))
+        if query_symbols:
+            definition_file_paths: set[str] = set()
+            for snippet in snippets[:50]:
+                cards = get_definition_cards_for_file(snippet.file_path, cloned_repo.cached_dir)
+                for card in cards:
+                    if card.symbol_name in query_symbols:
+                        definition_file_paths.add(snippet.file_path)
+                        break
+            if definition_file_paths:
+                DEFINITION_BOOST = 1.5
+                for i in range(len(queries)):
+                    for snippet in snippets:
+                        if snippet.file_path in definition_file_paths:
+                            if snippet.denotation in content_to_lexical_score_list[i]:
+                                content_to_lexical_score_list[i][snippet.denotation] *= DEFINITION_BOOST
+                logger.info(f"Boosted {len(definition_file_paths)} definition files for symbols: {query_symbols}")
+    except Exception as e:
+        logger.warning(f"Definition boost failed (non-fatal): {e}")
+
     ranked_snippets_list = [
         sorted(
             snippets,
