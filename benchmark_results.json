@@ -1,0 +1,1282 @@
+{
+  "baseline": {
+    "name": "Baseline (keyword search)",
+    "avg_symbol_recall": 0.7833333333333333,
+    "avg_wrong_file_rate": 0.94,
+    "avg_efficiency": 0.006156189336371672,
+    "p50_latency_ms": 24.254699994344264,
+    "p90_latency_ms": 30.78939998522401,
+    "p95_latency_ms": 31.483099999604747,
+    "per_case": [
+      {
+        "query": "fix the bug in context_pruning.py where get_relevant_co",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.00847314014573801,
+        "latency_ms": 25.24820002145134,
+        "found_symbols": [
+          "RepoContextManager",
+          "context_dfs",
+          "get_relevant_context"
+        ],
+        "found_files": [
+          "sweepai/cli.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/entities.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/intent_detector.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/handlers/on_failing_github_actions.py",
+          "sweepai/handlers/on_ticket.py",
+          "sweepai/utils/github_utils.py",
+          "sweepai/utils/ticket_rendering_utils.py",
+          "sweepai/utils/ticket_utils.py",
+          "test_full_pipeline.py",
+          "tests/search/test_lexical_search.py"
+        ]
+      },
+      {
+        "query": "add unit tests for the `ChatGPT` class in sweep",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.007196263699887018,
+        "latency_ms": 29.01139997993596,
+        "found_symbols": [
+          "ChatGPT"
+        ],
+        "found_files": [
+          "sweepai/agents/modify_utils.py",
+          "sweepai/agents/question_answerer.py",
+          "sweepai/chat/api.py",
+          "sweepai/core/chat.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/review_utils.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/handlers/create_pr.py",
+          "sweepai/utils/previous_diff_utils.py",
+          "sweepai/utils/ticket_utils.py",
+          "test_full_pipeline.py",
+          "tests/modify_benchmark.py"
+        ]
+      },
+      {
+        "query": "refactor extract_definitions to return structured data ",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.007250001812500452,
+        "latency_ms": 23.851399979321286,
+        "found_symbols": [
+          "extract_definitions"
+        ],
+        "found_files": [
+          "sweepai/agents/modify_utils.py",
+          "sweepai/chat/api.py",
+          "sweepai/config/client.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/review_prompts.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/core/symbol_resolver.py",
+          "sweepai/handlers/on_failing_github_actions.py",
+          "sweepai/utils/chat_logger.py",
+          "sweepai/utils/code_validators.py",
+          "sweepai/utils/github_utils.py",
+          "test_full_pipeline.py"
+        ]
+      },
+      {
+        "query": "implement a new symbol resolver that uses tree-sitter t",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.008818730984611315,
+        "latency_ms": 25.020300003234297,
+        "found_symbols": [
+          "extract_definitions",
+          "get_parser"
+        ],
+        "found_files": [
+          "benchmark_comparison.py",
+          "sweepai/agents/modify_utils.py",
+          "sweepai/agents/question_answerer.py",
+          "sweepai/core/context_assembler.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/intent_detector.py",
+          "sweepai/core/on_comment_prompts.py",
+          "sweepai/core/planning_prompts.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/symbol_resolver.py",
+          "sweepai/utils/code_validators.py",
+          "sweepai/utils/ticket_utils.py",
+          "test_full_pipeline.py",
+          "tests/search/test_lexical_search.py"
+        ]
+      },
+      {
+        "query": "how is the Snippet class used across the codebase?",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.008478743789320176,
+        "latency_ms": 21.805600001243874,
+        "found_symbols": [
+          "Snippet"
+        ],
+        "found_files": [
+          "benchmark_comparison.py",
+          "sweepai/agents/question_answerer.py",
+          "sweepai/agents/search_agent.py",
+          "sweepai/chat/api.py",
+          "sweepai/chat/search_prompts.py",
+          "sweepai/core/context_assembler.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/entities.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/core/symbol_resolver.py",
+          "sweepai/utils/code_validators.py",
+          "sweepai/utils/openai_listwise_reranker.py",
+          "test_full_pipeline.py"
+        ]
+      },
+      {
+        "query": "where is `RepoContextManager` defined and what fields d",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.009219138932423711,
+        "latency_ms": 16.363900009309873,
+        "found_symbols": [
+          "RepoContextManager"
+        ],
+        "found_files": [
+          "sweepai/agents/question_answerer.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/review_prompts.py",
+          "sweepai/core/review_utils.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/handlers/on_jira_ticket.py",
+          "sweepai/utils/fuzzy_diff.py",
+          "sweepai/utils/str_utils.py",
+          "sweepai/utils/ticket_utils.py",
+          "test_full_pipeline.py",
+          "tests/notebooks/src/test.py",
+          "tests/test_context_pruning.py"
+        ]
+      },
+      {
+        "query": "fix TypeError in multi_get_top_k_snippets when snippets",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.007002752081568057,
+        "latency_ms": 24.418799992417917,
+        "found_symbols": [
+          "multi_get_top_k_snippets"
+        ],
+        "found_files": [
+          "sweepai/agents/modify_utils.py",
+          "sweepai/agents/question_answerer.py",
+          "sweepai/chat/api.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/intent_detector.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/handlers/on_failing_github_actions.py",
+          "sweepai/handlers/on_ticket.py",
+          "sweepai/utils/code_validators.py",
+          "sweepai/utils/ticket_rendering_utils.py",
+          "sweepai/utils/ticket_utils.py",
+          "test_full_pipeline.py",
+          "tests/search/test_lexical_search.py"
+        ]
+      },
+      {
+        "query": "add caching to the vector search pipeline using the exi",
+        "symbol_recall": 0.5,
+        "wrong_file_rate": 1.0,
+        "efficiency": 0.003867664008292272,
+        "latency_ms": 24.983699986478314,
+        "found_symbols": [
+          "compute_vector_search_scores"
+        ],
+        "found_files": [
+          "sweepai/agents/modify_utils.py",
+          "sweepai/agents/question_answerer.py",
+          "sweepai/agents/search_agent.py",
+          "sweepai/chat/search_prompts.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/lexical_search.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/review_prompts.py",
+          "sweepai/core/review_utils.py",
+          "sweepai/core/symbol_resolver.py",
+          "sweepai/utils/openai_listwise_reranker.py",
+          "sweepai/utils/previous_diff_utils.py",
+          "sweepai/utils/ticket_utils.py"
+        ]
+      },
+      {
+        "query": "rename the chunk_code function to chunk_file_into_snipp",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.0089539142035941,
+        "latency_ms": 19.031899981200695,
+        "found_symbols": [
+          "chunk_code"
+        ],
+        "found_files": [
+          "sweepai/agents/agent_utils.py",
+          "sweepai/agents/assistant_wrapper.py",
+          "sweepai/agents/assistant_wrapper_test.py",
+          "sweepai/agents/modify.py",
+          "sweepai/agents/modify_utils.py",
+          "sweepai/chat/search_prompts.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/on_comment_prompts.py",
+          "sweepai/core/planning_prompts.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/review_prompts.py",
+          "sweepai/core/review_utils.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/utils/code_validators.py",
+          "test_full_pipeline.py"
+        ]
+      },
+      {
+        "query": "write tests for the import tree building logic in conte",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.00708626822942502,
+        "latency_ms": 24.254699994344264,
+        "found_symbols": [
+          "build_full_hierarchy",
+          "build_import_trees"
+        ],
+        "found_files": [
+          "sweepai/agents/modify_utils.py",
+          "sweepai/agents/question_answerer.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/on_comment_prompts.py",
+          "sweepai/core/planning_prompts.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/core/symbol_resolver.py",
+          "sweepai/utils/code_validators.py",
+          "sweepai/utils/github_utils.py",
+          "sweepai/utils/ticket_utils.py",
+          "test_full_pipeline.py",
+          "tests/search/test_lexical_search.py"
+        ]
+      },
+      {
+        "query": "implement intent detection for context retrieval querie",
+        "symbol_recall": 0.0,
+        "wrong_file_rate": 1.0,
+        "efficiency": 0.0,
+        "latency_ms": 20.535599993309006,
+        "found_symbols": [],
+        "found_files": [
+          "benchmark_comparison.py",
+          "sweepai/agents/question_answerer.py",
+          "sweepai/agents/search_agent.py",
+          "sweepai/chat/search_prompts.py",
+          "sweepai/core/context_assembler.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/dynamic_context_bot.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/intent_detector.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/review_prompts.py",
+          "sweepai/utils/multi_query.py",
+          "sweepai/utils/ticket_utils.py",
+          "test_full_pipeline.py"
+        ]
+      },
+      {
+        "query": "the lexical search returns wrong results when query con",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.006786562606040041,
+        "latency_ms": 43.73269999632612,
+        "found_symbols": [
+          "CustomIndex",
+          "search_index"
+        ],
+        "found_files": [
+          "benchmark_comparison.py",
+          "sweepai/agents/modify_utils.py",
+          "sweepai/agents/question_answerer.py",
+          "sweepai/chat/api.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/lexical_search.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/review_utils.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/utils/github_utils.py",
+          "sweepai/utils/openai_listwise_reranker.py",
+          "sweepai/utils/previous_diff_utils.py",
+          "sweepai/utils/ticket_utils.py",
+          "tests/search/test_lexical_search.py"
+        ]
+      },
+      {
+        "query": "find all callers of get_relevant_context across the cod",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.007913896802785692,
+        "latency_ms": 19.166700018104166,
+        "found_symbols": [
+          "get_relevant_context"
+        ],
+        "found_files": [
+          "benchmark_comparison.py",
+          "sweepai/agents/modify_utils.py",
+          "sweepai/agents/question_answerer.py",
+          "sweepai/agents/search_agent.py",
+          "sweepai/chat/api.py",
+          "sweepai/chat/search_prompts.py",
+          "sweepai/core/context_assembler.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/intent_detector.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/core/symbol_resolver.py",
+          "test_full_pipeline.py"
+        ]
+      },
+      {
+        "query": "what is the SweepConfig class and where is it defined?",
+        "symbol_recall": 0.0,
+        "wrong_file_rate": 1.0,
+        "efficiency": 0.0,
+        "latency_ms": 13.456799992127344,
+        "found_symbols": [],
+        "found_files": [
+          "benchmark_comparison.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/entities.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/intent_detector.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/symbol_resolver.py",
+          "sweepai/dataclasses/codereview.py",
+          "sweepai/utils/code_validators.py",
+          "sweepai/utils/convert_openai_anthropic.py",
+          "sweepai/utils/github_utils.py",
+          "sweepai/web/events.py",
+          "test_full_pipeline.py",
+          "tests/notebooks/src/test.py"
+        ]
+      },
+      {
+        "query": "add a new endpoint to handle webhook events for pull re",
+        "symbol_recall": 0.0,
+        "wrong_file_rate": 1.0,
+        "efficiency": 0.0,
+        "latency_ms": 25.94730001874268,
+        "found_symbols": [],
+        "found_files": [
+          "sweepai/api.py",
+          "sweepai/chat/api.py",
+          "sweepai/chat/search_prompts.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/on_comment_prompts.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/review_prompts.py",
+          "sweepai/core/review_utils.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/handlers/on_ticket.py",
+          "sweepai/utils/github_utils.py",
+          "sweepai/utils/search_and_replace.py",
+          "sweepai/utils/ticket_rendering_utils.py",
+          "tests/search/test_lexical_search.py"
+        ]
+      },
+      {
+        "query": "fix the ClonedRepo class so it handles permission error",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.007440088685857135,
+        "latency_ms": 27.03050000127405,
+        "found_symbols": [
+          "ClonedRepo"
+        ],
+        "found_files": [
+          "sweepai/agents/modify_utils.py",
+          "sweepai/agents/search_agent.py",
+          "sweepai/api.py",
+          "sweepai/chat/api.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/handlers/on_check_suite.py",
+          "sweepai/handlers/on_failing_github_actions.py",
+          "sweepai/handlers/review_pr.py",
+          "sweepai/utils/code_validators.py",
+          "sweepai/utils/github_utils.py",
+          "sweepai/utils/ticket_utils.py",
+          "tests/search/test_lexical_search.py"
+        ]
+      },
+      {
+        "query": "the `file_cache` decorator doesn't invalidate when func",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.007597860442499391,
+        "latency_ms": 23.86269997805357,
+        "found_symbols": [
+          "file_cache",
+          "recursive_hash"
+        ],
+        "found_files": [
+          "sweepai/agents/modify_utils.py",
+          "sweepai/agents/search_agent.py",
+          "sweepai/chat/search_prompts.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/on_comment_prompts.py",
+          "sweepai/core/planning_prompts.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/review_prompts.py",
+          "sweepai/core/review_utils.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/logn/cache.py",
+          "sweepai/utils/code_validators.py",
+          "sweepai/utils/openai_listwise_reranker.py",
+          "tests/notebooks/src/test.py"
+        ]
+      },
+      {
+        "query": "refactor the ChatGPT class to support streaming respons",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.008994018977380043,
+        "latency_ms": 22.9469999903813,
+        "found_symbols": [
+          "ChatGPT",
+          "continuous_llm_calls"
+        ],
+        "found_files": [
+          "sweepai/agents/question_answerer.py",
+          "sweepai/chat/api.py",
+          "sweepai/core/chat.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/entities.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/intent_detector.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/review_prompts.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/core/symbol_resolver.py",
+          "sweepai/utils/code_validators.py",
+          "sweepai/utils/progress.py",
+          "test_full_pipeline.py",
+          "tests/notebooks/src/test.py"
+        ]
+      },
+      {
+        "query": "the on_ticket handler is failing because fetch_relevant",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.8666666666666667,
+        "efficiency": 0.008019825007418338,
+        "latency_ms": 23.878100008005276,
+        "found_symbols": [
+          "fetch_relevant_files"
+        ],
+        "found_files": [
+          "sweepai/api.py",
+          "sweepai/chat/api.py",
+          "sweepai/core/chat.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/handlers/on_check_suite.py",
+          "sweepai/handlers/on_comment.py",
+          "sweepai/handlers/on_failing_github_actions.py",
+          "sweepai/handlers/on_ticket.py",
+          "sweepai/utils/fuzzy_diff.py",
+          "sweepai/utils/github_utils.py",
+          "sweepai/utils/ticket_rendering_utils.py",
+          "sweepai/utils/ticket_utils.py",
+          "tests/search/test_lexical_search.py"
+        ]
+      },
+      {
+        "query": "modify the search agent to use a different strategy for",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.0069633518790605045,
+        "latency_ms": 31.483099999604747,
+        "found_symbols": [
+          "search"
+        ],
+        "found_files": [
+          "sweepai/agents/modify_utils.py",
+          "sweepai/agents/question_answerer.py",
+          "sweepai/agents/search_agent.py",
+          "sweepai/chat/api.py",
+          "sweepai/chat/search_prompts.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/handlers/on_comment.py",
+          "sweepai/handlers/on_failing_github_actions.py",
+          "sweepai/handlers/on_ticket.py",
+          "sweepai/utils/ticket_utils.py",
+          "tests/search/test_lexical_search.py"
+        ]
+      },
+      {
+        "query": "the `parse_function_calls` in the chat module returns i",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.006588439923310559,
+        "latency_ms": 25.120099977357313,
+        "found_symbols": [
+          "parse_function_calls"
+        ],
+        "found_files": [
+          "benchmark_comparison.py",
+          "sweepai/agents/modify_utils.py",
+          "sweepai/agents/question_answerer.py",
+          "sweepai/agents/search_agent.py",
+          "sweepai/chat/api.py",
+          "sweepai/core/chat.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/review_utils.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/core/symbol_resolver.py",
+          "sweepai/utils/code_validators.py",
+          "sweepai/utils/openai_listwise_reranker.py",
+          "sweepai/utils/ticket_utils.py",
+          "tests/search/test_lexical_search.py"
+        ]
+      },
+      {
+        "query": "add validation for file paths in the modify agent befor",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.8666666666666667,
+        "efficiency": 0.0071606052143527174,
+        "latency_ms": 24.07739998307079,
+        "found_symbols": [
+          "handle_function_call",
+          "validate_and_parse_function_call"
+        ],
+        "found_files": [
+          "sweepai/agents/modify.py",
+          "sweepai/agents/modify_utils.py",
+          "sweepai/chat/api.py",
+          "sweepai/chat/search_prompts.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/on_comment_prompts.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/handlers/create_pr.py",
+          "sweepai/handlers/on_failing_github_actions.py",
+          "sweepai/handlers/on_ticket.py",
+          "sweepai/utils/github_utils.py",
+          "tests/search/test_lexical_search.py"
+        ]
+      },
+      {
+        "query": "improve the `check_syntax` function to support more lan",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.009656051447442112,
+        "latency_ms": 16.483999992487952,
+        "found_symbols": [
+          "check_syntax",
+          "get_parser"
+        ],
+        "found_files": [
+          "sweepai/agents/agent_utils.py",
+          "sweepai/agents/assistant_wrapper.py",
+          "sweepai/agents/assistant_wrapper_test.py",
+          "sweepai/chat/search_prompts.py",
+          "sweepai/config/client.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/review_prompts.py",
+          "sweepai/core/review_utils.py",
+          "sweepai/core/symbol_resolver.py",
+          "sweepai/utils/code_tree.py",
+          "sweepai/utils/code_validators.py",
+          "tests/search/test_lexical_search.py"
+        ]
+      },
+      {
+        "query": "the sweep bot is not correctly parsing file change requ",
+        "symbol_recall": 0.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.0,
+        "latency_ms": 30.610399990109727,
+        "found_symbols": [],
+        "found_files": [
+          "sweepai/agents/modify.py",
+          "sweepai/agents/modify_utils.py",
+          "sweepai/agents/question_answerer.py",
+          "sweepai/agents/search_agent.py",
+          "sweepai/chat/api.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/review_utils.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/handlers/create_pr.py",
+          "sweepai/handlers/on_comment.py",
+          "sweepai/handlers/on_failing_github_actions.py",
+          "sweepai/handlers/on_ticket.py",
+          "sweepai/utils/ticket_rendering_utils.py",
+          "tests/search/test_lexical_search.py"
+        ]
+      },
+      {
+        "query": "write tests for the `compute_vector_search_scores` func",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.0078581138955028,
+        "latency_ms": 21.4609999966342,
+        "found_symbols": [
+          "compute_vector_search_scores"
+        ],
+        "found_files": [
+          "sweepai/agents/modify_utils.py",
+          "sweepai/agents/question_answerer.py",
+          "sweepai/agents/search_agent.py",
+          "sweepai/chat/search_prompts.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/intent_detector.py",
+          "sweepai/core/lexical_search.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/utils/code_validators.py",
+          "sweepai/utils/openai_listwise_reranker.py",
+          "sweepai/utils/ticket_utils.py",
+          "test_full_pipeline.py"
+        ]
+      },
+      {
+        "query": "how does the modify agent decide which files to edit an",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.007486991352524988,
+        "latency_ms": 22.643699980108067,
+        "found_symbols": [
+          "modify"
+        ],
+        "found_files": [
+          "sweepai/agents/modify.py",
+          "sweepai/agents/modify_utils.py",
+          "sweepai/agents/question_answerer.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/handlers/create_pr.py",
+          "sweepai/handlers/on_comment.py",
+          "sweepai/handlers/on_failing_github_actions.py",
+          "sweepai/handlers/on_ticket.py",
+          "sweepai/utils/openai_listwise_reranker.py",
+          "sweepai/utils/ticket_rendering_utils.py",
+          "sweepai/utils/ticket_utils.py",
+          "tests/search/test_lexical_search.py"
+        ]
+      },
+      {
+        "query": "the DirectoryTree class is rendering incorrectly for de",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.009384384384384385,
+        "latency_ms": 19.793199986452237,
+        "found_symbols": [
+          "DirectoryTree"
+        ],
+        "found_files": [
+          "sweepai/agents/agent_utils.py",
+          "sweepai/agents/modify_utils.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/entities.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/pull_request_bot.py",
+          "sweepai/core/review_utils.py",
+          "sweepai/dataclasses/codereview.py",
+          "sweepai/handlers/on_failing_github_actions.py",
+          "sweepai/utils/code_validators.py",
+          "sweepai/utils/github_utils.py",
+          "sweepai/utils/prompt_constructor.py",
+          "sweepai/utils/tree_utils.py",
+          "sweepai/web/events.py"
+        ]
+      },
+      {
+        "query": "make the code review process faster by parallelizing th",
+        "symbol_recall": 0.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.0,
+        "latency_ms": 30.78939998522401,
+        "found_symbols": [],
+        "found_files": [
+          "sweepai/agents/modify_utils.py",
+          "sweepai/agents/question_answerer.py",
+          "sweepai/api.py",
+          "sweepai/chat/api.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/review_prompts.py",
+          "sweepai/core/review_utils.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/core/symbol_resolver.py",
+          "sweepai/handlers/on_comment.py",
+          "sweepai/handlers/on_ticket.py",
+          "sweepai/utils/ticket_rendering_utils.py",
+          "tests/search/test_lexical_search.py"
+        ]
+      },
+      {
+        "query": "users are reporting that the GitHub Actions log parsing",
+        "symbol_recall": 0.0,
+        "wrong_file_rate": 0.9333333333333333,
+        "efficiency": 0.0,
+        "latency_ms": 28.556800010846928,
+        "found_symbols": [],
+        "found_files": [
+          "sweepai/agents/search_agent.py",
+          "sweepai/api.py",
+          "sweepai/chat/api.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/review_utils.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/handlers/on_check_suite.py",
+          "sweepai/handlers/on_comment.py",
+          "sweepai/handlers/on_failing_github_actions.py",
+          "sweepai/handlers/on_ticket.py",
+          "sweepai/utils/code_validators.py",
+          "sweepai/utils/github_utils.py",
+          "sweepai/utils/ticket_rendering_utils.py",
+          "tests/search/test_lexical_search.py"
+        ]
+      },
+      {
+        "query": "update the tokenize_code function to handle multi-line ",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 1.0,
+        "efficiency": 0.006488871585231328,
+        "latency_ms": 27.490299980854616,
+        "found_symbols": [
+          "tokenize_code"
+        ],
+        "found_files": [
+          "sweepai/agents/modify_utils.py",
+          "sweepai/agents/question_answerer.py",
+          "sweepai/api.py",
+          "sweepai/chat/api.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/core/eval_context_retrieval.py",
+          "sweepai/core/on_comment_prompts.py",
+          "sweepai/core/prompts.py",
+          "sweepai/core/reflection_utils.py",
+          "sweepai/core/review_prompts.py",
+          "sweepai/core/review_utils.py",
+          "sweepai/core/sweep_bot.py",
+          "sweepai/handlers/on_failing_github_actions.py",
+          "sweepai/utils/openai_listwise_reranker.py",
+          "tests/notebooks/src/test.py"
+        ]
+      }
+    ]
+  },
+  "ours": {
+    "name": "Ours (intent + symbols + assembly)",
+    "avg_symbol_recall": 0.8055555555555556,
+    "avg_wrong_file_rate": 0.6327777777777778,
+    "avg_efficiency": 0.3719748910126388,
+    "p50_latency_ms": 7.060699979774654,
+    "p90_latency_ms": 24.73850001115352,
+    "p95_latency_ms": 26.421099988510832,
+    "per_case": [
+      {
+        "query": "fix the bug in context_pruning.py where get_relevant_co",
+        "symbol_recall": 0.6666666666666666,
+        "wrong_file_rate": 0.5,
+        "efficiency": 0.26752273943285176,
+        "latency_ms": 661.8081000051461,
+        "found_symbols": [
+          "RepoContextManager",
+          "get_relevant_context"
+        ],
+        "found_files": [
+          "sweepai/core/context_pruning.py",
+          "sweepai/utils/ticket_utils.py"
+        ]
+      },
+      {
+        "query": "add unit tests for the `ChatGPT` class in sweep",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.6666666666666666,
+        "efficiency": 0.7686395080707149,
+        "latency_ms": 9.554499993100762,
+        "found_symbols": [
+          "ChatGPT"
+        ],
+        "found_files": [
+          "sweepai/cli.py",
+          "sweepai/core/chat.py",
+          "tests/modify_tests/modify_test.py"
+        ]
+      },
+      {
+        "query": "refactor extract_definitions to return structured data ",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.5,
+        "efficiency": 0.5252100840336135,
+        "latency_ms": 13.301300001330674,
+        "found_symbols": [
+          "extract_definitions"
+        ],
+        "found_files": [
+          "sweepai/utils/code_validators.py",
+          "tests/notebooks/src/test.py"
+        ]
+      },
+      {
+        "query": "implement a new symbol resolver that uses tree-sitter t",
+        "symbol_recall": 0.0,
+        "wrong_file_rate": 0.5,
+        "efficiency": 0.0,
+        "latency_ms": 24.73850001115352,
+        "found_symbols": [],
+        "found_files": [
+          "sweepai/core/symbol_resolver.py",
+          "sweepai/utils/code_validators.py"
+        ]
+      },
+      {
+        "query": "how is the Snippet class used across the codebase?",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.6666666666666666,
+        "efficiency": 0.6997900629811057,
+        "latency_ms": 9.140900016063824,
+        "found_symbols": [
+          "Snippet"
+        ],
+        "found_files": [
+          "sweepai/agents/question_answerer.py",
+          "sweepai/chat/api.py",
+          "sweepai/core/entities.py"
+        ]
+      },
+      {
+        "query": "where is `RepoContextManager` defined and what fields d",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.0,
+        "efficiency": 0.35423308537017356,
+        "latency_ms": 7.060699979774654,
+        "found_symbols": [
+          "RepoContextManager"
+        ],
+        "found_files": [
+          "sweepai/core/context_pruning.py"
+        ]
+      },
+      {
+        "query": "fix TypeError in multi_get_top_k_snippets when snippets",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.75,
+        "efficiency": 0.4051863857374392,
+        "latency_ms": 3.113500017207116,
+        "found_symbols": [
+          "multi_get_top_k_snippets"
+        ],
+        "found_files": [
+          "sweepai/core/entities.py",
+          "sweepai/utils/fuzzy_diff.py",
+          "sweepai/utils/safe_pqueue.py",
+          "sweepai/utils/ticket_utils.py"
+        ]
+      },
+      {
+        "query": "add caching to the vector search pipeline using the exi",
+        "symbol_recall": 0.5,
+        "wrong_file_rate": 0.8,
+        "efficiency": 0.17325017325017325,
+        "latency_ms": 3.927600017050281,
+        "found_symbols": [
+          "file_cache"
+        ],
+        "found_files": [
+          "sweepai/agents/agent_utils.py",
+          "sweepai/agents/question_answerer.py",
+          "sweepai/agents/search_agent.py",
+          "sweepai/logn/cache.py",
+          "sweepai/utils/majority_vote.py"
+        ]
+      },
+      {
+        "query": "rename the chunk_code function to chunk_file_into_snipp",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.75,
+        "efficiency": 0.4582951420714941,
+        "latency_ms": 3.3555999980308115,
+        "found_symbols": [
+          "chunk_code"
+        ],
+        "found_files": [
+          "sweepai/core/entities.py",
+          "sweepai/dataclasses/codereview.py",
+          "sweepai/utils/code_validators.py",
+          "sweepai/utils/streamable_functions.py"
+        ]
+      },
+      {
+        "query": "write tests for the import tree building logic in conte",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.5,
+        "efficiency": 0.8361204013377926,
+        "latency_ms": 7.595000002766028,
+        "found_symbols": [
+          "build_full_hierarchy",
+          "build_import_trees"
+        ],
+        "found_files": [
+          "sweepai/cli.py",
+          "sweepai/core/context_pruning.py"
+        ]
+      },
+      {
+        "query": "implement intent detection for context retrieval querie",
+        "symbol_recall": 0.0,
+        "wrong_file_rate": 1.0,
+        "efficiency": 0.0,
+        "latency_ms": 9.180699998978525,
+        "found_symbols": [],
+        "found_files": [
+          "sweepai/agents/modify_utils.py"
+        ]
+      },
+      {
+        "query": "the lexical search returns wrong results when query con",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.75,
+        "efficiency": 0.4582951420714941,
+        "latency_ms": 11.689000006299466,
+        "found_symbols": [
+          "CustomIndex",
+          "search_index"
+        ],
+        "found_files": [
+          "sweepai/agents/search_agent.py",
+          "sweepai/core/lexical_search.py",
+          "sweepai/dataclasses/searchindex.py",
+          "sweepai/utils/tree_utils.py"
+        ]
+      },
+      {
+        "query": "find all callers of get_relevant_context across the cod",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.6666666666666666,
+        "efficiency": 0.7407407407407407,
+        "latency_ms": 10.774599999422207,
+        "found_symbols": [
+          "get_relevant_context"
+        ],
+        "found_files": [
+          "sweepai/chat/api.py",
+          "sweepai/core/context_pruning.py",
+          "sweepai/utils/ticket_utils.py"
+        ]
+      },
+      {
+        "query": "what is the SweepConfig class and where is it defined?",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.5,
+        "efficiency": 0.37579857196542654,
+        "latency_ms": 5.217800004174933,
+        "found_symbols": [
+          "SweepConfig"
+        ],
+        "found_files": [
+          "sweepai/config/client.py",
+          "tests/e2e/test_cli_run.py"
+        ]
+      },
+      {
+        "query": "add a new endpoint to handle webhook events for pull re",
+        "symbol_recall": 0.0,
+        "wrong_file_rate": 1.0,
+        "efficiency": 0.0,
+        "latency_ms": 2.1376000076998025,
+        "found_symbols": [],
+        "found_files": [
+          "sweepai/api.py",
+          "sweepai/utils/github_utils.py",
+          "sweepai/web/events.py"
+        ]
+      },
+      {
+        "query": "fix the ClonedRepo class so it handles permission error",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.6666666666666666,
+        "efficiency": 0.41407867494824013,
+        "latency_ms": 18.390799988992512,
+        "found_symbols": [
+          "ClonedRepo"
+        ],
+        "found_files": [
+          "sweepai/handlers/on_button_click.py",
+          "sweepai/utils/github_utils.py",
+          "sweepai/utils/github_utils_test.py"
+        ]
+      },
+      {
+        "query": "the `file_cache` decorator doesn't invalidate when func",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.8,
+        "efficiency": 0.3486750348675035,
+        "latency_ms": 5.459400010295212,
+        "found_symbols": [
+          "file_cache",
+          "recursive_hash"
+        ],
+        "found_files": [
+          "sweepai/agents/agent_utils.py",
+          "sweepai/core/entities.py",
+          "sweepai/logn/cache.py",
+          "sweepai/utils/majority_vote.py",
+          "sweepai/web/events.py"
+        ]
+      },
+      {
+        "query": "refactor the ChatGPT class to support streaming respons",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.75,
+        "efficiency": 0.5393743257820928,
+        "latency_ms": 5.081699986476451,
+        "found_symbols": [
+          "ChatGPT",
+          "continuous_llm_calls"
+        ],
+        "found_files": [
+          "sweepai/chat/api.py",
+          "sweepai/core/chat.py",
+          "sweepai/utils/streamable_functions.py",
+          "tests/notebooks/src/test.py"
+        ]
+      },
+      {
+        "query": "the on_ticket handler is failing because fetch_relevant",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.0,
+        "efficiency": 0.4011231448054553,
+        "latency_ms": 7.214399985969067,
+        "found_symbols": [
+          "fetch_relevant_files"
+        ],
+        "found_files": [
+          "sweepai/handlers/on_ticket.py",
+          "sweepai/utils/ticket_utils.py"
+        ]
+      },
+      {
+        "query": "modify the search agent to use a different strategy for",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.6666666666666666,
+        "efficiency": 0.3454231433506045,
+        "latency_ms": 2.297099999850616,
+        "found_symbols": [
+          "search"
+        ],
+        "found_files": [
+          "sweepai/agents/modify.py",
+          "sweepai/agents/search_agent.py",
+          "sweepai/core/entities.py"
+        ]
+      },
+      {
+        "query": "the `parse_function_calls` in the chat module returns i",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.6666666666666666,
+        "efficiency": 0.30478512648582745,
+        "latency_ms": 11.420599999837577,
+        "found_symbols": [
+          "parse_function_calls"
+        ],
+        "found_files": [
+          "benchmark_comparison.py",
+          "sweepai/agents/agent_utils.py",
+          "sweepai/core/chat.py"
+        ]
+      },
+      {
+        "query": "add validation for file paths in the modify agent befor",
+        "symbol_recall": 0.5,
+        "wrong_file_rate": 0.3333333333333333,
+        "efficiency": 0.16270745200130166,
+        "latency_ms": 4.992599977413192,
+        "found_symbols": [
+          "validate_and_parse_function_call"
+        ],
+        "found_files": [
+          "sweepai/agents/modify.py",
+          "sweepai/agents/modify_utils.py",
+          "sweepai/web/events.py"
+        ]
+      },
+      {
+        "query": "improve the `check_syntax` function to support more lan",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.6666666666666666,
+        "efficiency": 0.3541076487252125,
+        "latency_ms": 4.792799998540431,
+        "found_symbols": [
+          "check_syntax",
+          "get_parser"
+        ],
+        "found_files": [
+          "sweepai/core/entities.py",
+          "sweepai/dataclasses/codereview.py",
+          "sweepai/utils/code_validators.py"
+        ]
+      },
+      {
+        "query": "the sweep bot is not correctly parsing file change requ",
+        "symbol_recall": 0.5,
+        "wrong_file_rate": 0.6666666666666666,
+        "efficiency": 0.1736714136853074,
+        "latency_ms": 3.94110000343062,
+        "found_symbols": [
+          "FileChangeRequest"
+        ],
+        "found_files": [
+          "sweepai/core/entities.py",
+          "sweepai/utils/tree_utils.py",
+          "sweepai/web/events.py"
+        ]
+      },
+      {
+        "query": "write tests for the `compute_vector_search_scores` func",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.75,
+        "efficiency": 0.715307582260372,
+        "latency_ms": 1.9207000150345266,
+        "found_symbols": [
+          "compute_vector_search_scores"
+        ],
+        "found_files": [
+          "sweepai/agents/search_agent.py",
+          "sweepai/cli.py",
+          "sweepai/core/entities.py",
+          "sweepai/core/lexical_search.py"
+        ]
+      },
+      {
+        "query": "how does the modify agent decide which files to edit an",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.0,
+        "efficiency": 0.3855050115651504,
+        "latency_ms": 26.421099988510832,
+        "found_symbols": [
+          "modify"
+        ],
+        "found_files": [
+          "sweepai/agents/modify.py"
+        ]
+      },
+      {
+        "query": "the DirectoryTree class is rendering incorrectly for de",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.6666666666666666,
+        "efficiency": 0.32404406999351915,
+        "latency_ms": 6.107900000642985,
+        "found_symbols": [
+          "DirectoryTree"
+        ],
+        "found_files": [
+          "sweepai/core/context_assembler.py",
+          "sweepai/utils/github_utils.py",
+          "sweepai/utils/tree_utils.py"
+        ]
+      },
+      {
+        "query": "make the code review process faster by parallelizing th",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 1.0,
+        "efficiency": 0.30184123151222453,
+        "latency_ms": 15.444399992702529,
+        "found_symbols": [
+          "review_pr"
+        ],
+        "found_files": [
+          "sweepai/core/entities.py",
+          "sweepai/handlers/review_pr.py",
+          "tests/rerun_review_pr.py"
+        ]
+      },
+      {
+        "query": "users are reporting that the GitHub Actions log parsing",
+        "symbol_recall": 0.0,
+        "wrong_file_rate": 1.0,
+        "efficiency": 0.0,
+        "latency_ms": 2.6409999991301447,
+        "found_symbols": [],
+        "found_files": [
+          "sweepai/utils/tree_utils.py",
+          "sweepai/web/events.py"
+        ]
+      },
+      {
+        "query": "update the tokenize_code function to handle multi-line ",
+        "symbol_recall": 1.0,
+        "wrong_file_rate": 0.8,
+        "efficiency": 0.3255208333333333,
+        "latency_ms": 5.565200001001358,
+        "found_symbols": [
+          "tokenize_code"
+        ],
+        "found_files": [
+          "sweepai/agents/modify_utils.py",
+          "sweepai/core/entities.py",
+          "sweepai/core/lexical_search.py",
+          "sweepai/utils/convert_openai_anthropic.py",
+          "sweepai/utils/tree_utils.py"
+        ]
+      }
+    ]
+  },
+  "deltas": {
+    "symbol_recall_pp": 0.022222222222222254,
+    "wrong_file_rate_pp": -0.3072222222222222,
+    "efficiency_ratio": 60.42291272865122
+  }
+}

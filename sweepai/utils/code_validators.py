@@ -17,9 +17,13 @@ from pylint.lint import Run
 from pylint.reporters.text import TextReporter
 from loguru import logger
 from tree_sitter import Node, Parser, Language
-from tree_sitter_languages import get_parser as tree_sitter_get_parser
 import tree_sitter_python
 import tree_sitter_javascript
+
+try:
+    from tree_sitter_languages import get_parser as tree_sitter_get_parser
+except ImportError:
+    tree_sitter_get_parser = None
 
 from sweepai.core.entities import Snippet
 from sweepai.logn.cache import file_cache
@@ -29,16 +33,34 @@ warnings.simplefilter("ignore", category=FutureWarning)
 
 AVG_CHAR_IN_LINE = 60
 
+def _make_language(raw_lang, name: str) -> Language:
+    """Create a Language object compatible with both tree-sitter 0.21 and 0.25+."""
+    try:
+        return Language(raw_lang, name)
+    except TypeError:
+        return Language(raw_lang)
+
+
+def _make_parser_with_language(lang: Language) -> Parser:
+    """Create a Parser compatible with both tree-sitter 0.21 (set_language) and 0.25+ (constructor)."""
+    try:
+        parser = Parser()
+        parser.set_language(lang)
+        return parser
+    except (TypeError, AttributeError):
+        return Parser(lang)
+
+
 def get_parser(language: str):
-    parser = Parser()
     if language in ("python", "py"):
-        lang = Language(tree_sitter_python.language(), "python")
+        lang = _make_language(tree_sitter_python.language(), "python")
     elif language in ("javascript", "js"):
-        lang = Language(tree_sitter_javascript.language(), "javascript")
+        lang = _make_language(tree_sitter_javascript.language(), "javascript")
     else:
-        return tree_sitter_get_parser(language)
-    parser.set_language(lang)
-    return parser
+        if tree_sitter_get_parser is not None:
+            return tree_sitter_get_parser(language)
+        return None
+    return _make_parser_with_language(lang)
 
 def non_whitespace_len(s: str) -> int:  # new len function
     return len(re.sub("\s", "", s))
@@ -681,39 +703,197 @@ def get_function_name(file_name: str, source_code: str, line_number: int):
 
     return function_name
 
-def extract_definitions(file_name, code):
-    ext = file_name.split(".")[-1]
-    if ext in extension_to_language:
-        language = extension_to_language[ext]
-    else:
-        return None
+@dataclass
+class DefinitionInfo:
+    """Structured representation of a code definition found via tree-sitter."""
+    name: str
+    kind: str  # "class", "function", "method", "variable"
+    signature: str
+    start_line: int
+    end_line: int
+    doc_summary: str
+    parent_name: Optional[str]  # containing class name for methods
+    members: list  # member signatures for classes
 
-    type_mapping_per_language = {
-        "typescript": ["class_declaration", "method_definition"],
-        "tsx": ["function_declaration", "class_declaration", "method_definition"],
-        "javascript": ["function_declaration", "class_declaration", "method_definition"]
-    }
-    function_type_strings = type_mapping_per_language.get(language)
+DEFINITION_NODE_TYPES = {
+    "python": {
+        "class_definition": "class",
+        "function_definition": "function",
+    },
+    "tsx": {
+        "class_declaration": "class",
+        "function_declaration": "function",
+        "method_definition": "method",
+        "arrow_function": "function",
+        "lexical_declaration": "variable",
+    },
+    "typescript": {
+        "class_declaration": "class",
+        "function_declaration": "function",
+        "method_definition": "method",
+        "arrow_function": "function",
+        "lexical_declaration": "variable",
+    },
+    "javascript": {
+        "class_declaration": "class",
+        "function_declaration": "function",
+        "method_definition": "method",
+        "arrow_function": "function",
+        "lexical_declaration": "variable",
+    },
+    "java": {
+        "class_declaration": "class",
+        "method_declaration": "method",
+        "interface_declaration": "class",
+    },
+    "go": {
+        "function_declaration": "function",
+        "method_declaration": "method",
+        "type_declaration": "class",
+    },
+    "rust": {
+        "function_item": "function",
+        "impl_item": "class",
+        "struct_item": "class",
+        "enum_item": "class",
+        "trait_item": "class",
+    },
+    "ruby": {
+        "class": "class",
+        "method": "function",
+        "singleton_method": "function",
+        "module": "class",
+    },
+    "cpp": {
+        "class_specifier": "class",
+        "function_definition": "function",
+        "struct_specifier": "class",
+    },
+}
+
+
+def _get_node_signature(node, code_lines: list[str]) -> str:
+    """Extract the signature line(s) of a definition node."""
+    start_line = node.start_point[0]
+    end_line = node.end_point[0]
+    if start_line >= len(code_lines):
+        return ""
+    first_line = code_lines[start_line].strip()
+    if end_line > start_line and start_line + 1 < len(code_lines):
+        second_line = code_lines[start_line + 1].strip()
+        if second_line and not second_line.startswith(("#", "//", "/*", '"""', "'''")):
+            if any(first_line.endswith(c) for c in ("(", ",", "\\")) or len(first_line) < 40:
+                return first_line + " " + second_line
+    return first_line
+
+
+def _get_python_docstring(node, code_lines: list[str]) -> str:
+    """Extract first line of a Python docstring from a function/class body."""
+    body = node.child_by_field_name("body")
+    if body is None:
+        return ""
+    for child in body.children:
+        if child.type == "expression_statement":
+            for sub in child.children:
+                if sub.type == "string":
+                    raw = sub.text.decode("utf8").strip("\"'").strip()
+                    first_line = raw.split("\n")[0].strip()
+                    return first_line[:200]
+        break
+    return ""
+
+
+def _get_class_members(node, code_lines: list[str], language: str) -> list[str]:
+    """Extract top-level member signatures from a class node."""
+    members = []
+    body = node.child_by_field_name("body")
+    if body is None:
+        for child in node.children:
+            if child.type in ("class_body", "block", "declaration_list"):
+                body = child
+                break
+    if body is None:
+        return members
+    for child in body.children:
+        name_node = child.child_by_field_name("name")
+        if name_node:
+            sig = _get_node_signature(child, code_lines)
+            if sig:
+                members.append(sig)
+        if len(members) >= 8:
+            break
+    return members
+
+
+def extract_definitions(file_name: str, code: str) -> list[DefinitionInfo]:
+    """Extract all top-level definitions from a file as structured DefinitionInfo objects."""
+    ext = file_name.split(".")[-1]
+    if ext not in extension_to_language:
+        return []
+    language = extension_to_language[ext]
+
+    type_map = DEFINITION_NODE_TYPES.get(language, {})
+    if not type_map:
+        return []
 
     parser = get_parser(language)
     tree = parser.parse(bytes(code, "utf8"))
+    code_lines = code.splitlines()
+    results: list[DefinitionInfo] = []
 
-    def traverse_node(node):
-        if node.type in function_type_strings:
-            if node.type == "class_declaration":
-                class_name = node.child_by_field_name("name").text.decode("utf8")
-                print(f"Class: {class_name}")
-            elif node.type == "function_declaration":
-                function_name = node.child_by_field_name("name").text.decode("utf8")
-                print(f"Function: {function_name}")
-            elif node.type == "method_definition":
-                method_name = node.child_by_field_name("name").text.decode("utf8")
-                print(f"Method: {method_name}")
+    def traverse_node(node, parent_class_name: Optional[str] = None):
+        kind = type_map.get(node.type)
+        if kind:
+            name_node = node.child_by_field_name("name")
+            name = name_node.text.decode("utf8") if name_node else ""
+            if not name and node.type == "lexical_declaration":
+                for child in node.children:
+                    if child.type == "variable_declarator":
+                        n = child.child_by_field_name("name")
+                        if n:
+                            name = n.text.decode("utf8")
+                        break
+            if not name:
+                for child in node.children:
+                    traverse_node(child, parent_class_name)
+                return
+
+            start_line = node.start_point[0] + 1
+            end_line = node.end_point[0] + 1
+            signature = _get_node_signature(node, code_lines)
+
+            doc_summary = ""
+            if language == "python":
+                doc_summary = _get_python_docstring(node, code_lines)
+
+            members = []
+            actual_kind = kind
+            if kind == "class":
+                members = _get_class_members(node, code_lines, language)
+            elif parent_class_name:
+                actual_kind = "method"
+
+            results.append(DefinitionInfo(
+                name=name,
+                kind=actual_kind,
+                signature=signature,
+                start_line=start_line,
+                end_line=end_line,
+                doc_summary=doc_summary,
+                parent_name=parent_class_name,
+                members=members,
+            ))
+
+            if kind == "class":
+                for child in node.children:
+                    traverse_node(child, parent_class_name=name)
+                return
 
         for child in node.children:
-            traverse_node(child)
+            traverse_node(child, parent_class_name)
 
     traverse_node(tree.root_node)
+    return results
 
 if __name__ == "__main__":
     test_code = """

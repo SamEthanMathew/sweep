@@ -21,6 +21,9 @@ from sweepai.utils.ripgrep_utils import post_process_rg_output
 from sweepai.utils.openai_listwise_reranker import listwise_rerank_snippets
 from sweepai.utils.progress import AssistantConversation, TicketProgress
 from sweepai.utils.tree_utils import DirectoryTree
+from sweepai.core.intent_detector import detect_intent
+from sweepai.core.symbol_resolver import resolve_symbols_from_query
+from sweepai.core.context_assembler import assemble_context
 
 ASSISTANT_MAX_CHARS = 4096 * 4 * 0.95  # ~95% of 4k tokens
 NUM_SNIPPETS_TO_SHOW_AT_START = 15
@@ -212,6 +215,7 @@ class RepoContextManager:
     snippet_scores: dict[str, float] = field(default_factory=dict)
     current_top_tree: str | None = None
     dir_obj: DirectoryTree | None = None
+    assembled_context: str = ""
 
     @property
     def top_snippet_paths(self):
@@ -643,38 +647,55 @@ def get_relevant_context(
 ) -> RepoContextManager:
     logger.info("Seed: " + str(seed))
     try:
-        # for any code file mentioned in the query, build its import tree - This is currently not used
         repo_context_manager = build_import_trees(
             repo_context_manager,
             import_graph,
         )
-        # for any code file mentioned in the query add it to the top relevant snippets
         repo_context_manager = add_relevant_files_to_top_snippets(repo_context_manager)
-        # add relevant files to dir_obj inside repo_context_manager, this is in case dir_obj is too large when as a string
         repo_context_manager.dir_obj.add_relevant_files(
             repo_context_manager.relevant_file_paths
         )
 
-        user_prompt = repo_context_manager.format_context(
-            unformatted_user_prompt=unformatted_user_prompt,
-            query=query,
+        intent = detect_intent(
+            query,
+            repo_context_manager.relevant_file_paths,
+            repo_context_manager.current_top_snippets,
         )
-        return repo_context_manager # Temporarily disabled context
-        chat_gpt = ChatGPT()
-        chat_gpt.messages = [Message(role="system", content=sys_prompt)]
-        old_relevant_snippets = deepcopy(repo_context_manager.current_top_snippets)
-        old_read_only_snippets = deepcopy(repo_context_manager.read_only_snippets)
-        try:
-            repo_context_manager = context_dfs(
-                user_prompt,
-                repo_context_manager,
-                problem_statement=query,
-                num_rollouts=num_rollouts,
-            )
-        except openai.BadRequestError as e:  # sometimes means that run has expired
-            logger.exception(e)
-        repo_context_manager.current_top_snippets.extend(old_relevant_snippets)
-        repo_context_manager.read_only_snippets.extend(old_read_only_snippets)
+        logger.info(
+            f"Detected intent: {intent.intent_type} "
+            f"(confidence={intent.confidence:.2f}, "
+            f"symbols={intent.target_symbols[:5]})"
+        )
+
+        repo_dir = repo_context_manager.cloned_repo.repo_dir
+        definition_cards = resolve_symbols_from_query(
+            query,
+            repo_context_manager.current_top_snippets,
+            repo_dir,
+        )
+        logger.info(f"Resolved {len(definition_cards)} definition cards")
+
+        if definition_cards:
+            definition_file_paths = {card.file_path for card in definition_cards}
+            current_paths = {s.file_path for s in repo_context_manager.current_top_snippets}
+            for card_path in definition_file_paths:
+                if card_path not in current_paths:
+                    matching = [
+                        s for s in repo_context_manager.snippets
+                        if s.file_path == card_path
+                    ]
+                    if matching:
+                        best = max(matching, key=lambda s: repo_context_manager.snippet_scores.get(s.denotation, 0))
+                        repo_context_manager.current_top_snippets.append(best)
+
+        repo_context_manager.assembled_context = assemble_context(
+            intent=intent,
+            definition_cards=definition_cards,
+            top_snippets=repo_context_manager.current_top_snippets,
+            read_only_snippets=repo_context_manager.read_only_snippets,
+            import_trees=repo_context_manager.import_trees,
+        )
+
         return repo_context_manager
     except Exception as e:
         logger.exception(e)
